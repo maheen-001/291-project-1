@@ -19,13 +19,13 @@ def login(conn):
     cursor = conn.cursor()
 
     # Get user input (with enforcement of numerical uid)
-    uid_in = input("Enter User ID: ").strip()
+    uid_in = input("\n❁›--› Enter User ID: ").strip()
     if not uid_in.isdigit():
-        print("User ID must be numeric\n")
+        print("\n🚫 User ID must be numeric. 🚫")
         return None
     uid = int(uid_in)
 
-    password = getpass.getpass("Enter Password: ").strip()
+    password = getpass.getpass("❁›--› Enter Password: ").strip()
 
     # Verify
     cursor.execute("SELECT * FROM users WHERE uid = ? AND pwd = ?", (uid, password))
@@ -33,10 +33,13 @@ def login(conn):
 
     # Feedback
     if user:
-        print("Login successful\n")
+        word = "an"
+        if user['role'] == "Student":
+            word = "a"
+        print(f"\n✅ Login successful ✅\n\n╰┈➤ Hello, {user['name']}! You are currently logged in as {word} {user['role']}.")
         return dict(user)
     else:
-        print("Invalid uid or password\n")
+        print("\n🚫 Invalid uid or password 🚫\n")
         return None
     
 """
@@ -49,28 +52,24 @@ def register(conn):
     cursor = conn.cursor()
 
     # User input
-    name = input("Enter your name: ").strip()
-    email = input("Enter your email: ").strip()
-    password = getpass.getpass("Enter a password: ").strip()
+    name = input("\n❁›--› Enter your name: ").strip()
+    email = input("❁›--› Enter your email: ").strip()
+    password = getpass.getpass("❁›--› Enter a password: ").strip()
 
     # Verify that the email is unique (case insensitive vers)
     cursor.execute("SELECT * FROM users WHERE LOWER(email) = LOWER(?)", (email,))
     if cursor.fetchone():
-        print("The email is already in use\n")
+        print("\n🚫 The email is already in use. 🚫")
         return None
-    
-    # Generate a new uid (set as 1 if no uids exist, otherwise make it 1 higher than the max)
-    cursor.execute("SELECT MAX(uid) FROM users")
-    max_uid = cursor.fetchone()[0]
-    new_uid = 1 if max_uid is None else max_uid + 1
 
     # Insert the new user
-    cursor.execute("INSERT INTO users (uid, name, email, role, pwd) VALUES (?, ?, ?, ?, ?)", 
-                   (new_uid, name, email, "Student", password))
+    cursor.execute("INSERT INTO users (name, email, role, pwd) VALUES (?, ?, ?, ?)", 
+                   (name, email, "Student", password))
     conn.commit()
 
-    # Feedback
-    print(f"Registration was successful, your user ID is: {new_uid}\n")
+    # Feedback and uid
+    new_uid = cursor.lastrowid
+    print(f"\n✅ Registration was successful, your user ID is: {new_uid} ✅\n")
     
     return {
         "uid": new_uid,

@@ -9,6 +9,7 @@ Rules: db filename from commandline only; no hardcoding; parameterized queries
 # imports
 import sqlite3
 import sys
+import os
 
 """
 Basic function to allow the user to provide the name of the db file to open.
@@ -26,10 +27,16 @@ def connect():
     # file should be the first in the list of args given by user
     file = sys.argv[1]
 
+    # Check if the file actually exists first
+    if not os.path.exists(file):
+        print(f"Error: Database file '{file}' does not exist.")
+        sys.exit(1)
+
     try:
         # open the db file and create a connection object
         conn = sqlite3.connect(file)
         conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA foreign_keys = ON;")
         return conn
     
     except Exception as e:
