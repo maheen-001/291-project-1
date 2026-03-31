@@ -1,12 +1,12 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/cFzps5bk)
 # CMPUT 291 Project 1 - Winter 2026  
-Group member names and ccids (2-3 members)  
+Group member names.
   
-  maabbas1, Maheen Abbasi 
+  Maheen Abbasi 
   
-  stmoham1, Sarah Mohammed
+  Sarah Mohammed
   
-  manaal3, Manaal Naeem
+  Manaal Naeem
 
 # Names of anyone you have collaborated with (as much as it is allowed within the course policy) or a line saying that you did not collaborate with anyone else.  
 
