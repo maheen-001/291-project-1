@@ -67,7 +67,7 @@ Example:
 python main.py test.db
 ```
 
-## 📚 Additional Resources
+## Additional Resources
 
 * [Stack Overflow – How do I print in the middle of the screen?](https://stackoverflow.com/questions/29780053/how-do-i-print-in-the-middle-of-the-screen)
   Used to help implement centered terminal output for improved table formatting.
