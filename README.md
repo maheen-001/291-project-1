@@ -2,7 +2,7 @@
 
 A command-line course management system built using **Python** and **SQLite**.
 
-## 👥 Team Members
+## Team Members
 
 * Maheen Abbasi
 * Sarah Mohammed
